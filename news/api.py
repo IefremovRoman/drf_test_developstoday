@@ -22,10 +22,10 @@ class NewsUpdateDelete(generics.RetrieveUpdateDestroyAPIView):
 class NewsUpVote(APIView):
     lookup_url_kwarg = "news_pk"
 
-    def post(self, request, pk):
-        get_object_or_404(News, pk=pk)
-        News.objects.filter(pk=pk).update(upvotes=F("upvotes") + 1)
-        obj = get_object_or_404(News, pk=pk)
+    def post(self, request, news_pk):
+        get_object_or_404(News, pk=news_pk)
+        News.objects.filter(pk=news_pk).update(upvotes=F("upvotes") + 1)
+        obj = get_object_or_404(News, pk=news_pk)
         serializer = NewsSerializer(obj)
         return Response(serializer.data)
 
