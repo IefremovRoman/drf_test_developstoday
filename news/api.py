@@ -16,9 +16,12 @@ class NewsListCreate(generics.ListCreateAPIView):
 class NewsUpdateDelete(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = NewsSerializer
     queryset = News.objects.all()
+    lookup_url_kwarg = "news_pk"
 
 
 class NewsUpVote(APIView):
+    lookup_url_kwarg = "news_pk"
+
     def post(self, request, pk):
         get_object_or_404(News, pk=pk)
         News.objects.filter(pk=pk).update(upvotes=F("upvotes") + 1)
@@ -31,15 +34,17 @@ class CommentListCreate(generics.ListCreateAPIView):
     serializer_class = CommentSerializer
 
     def get_queryset(self):
-        pk = self.kwargs["pk"]
-        return Comment.objects.filter(news=pk)
+        news_pk = self.kwargs["news_pk"]
+        return Comment.objects.filter(news=news_pk)
+
+    def perform_create(self, serializer):
+        serializer.save(news_id=self.kwargs["news_pk"])
 
 
 class CommentUpdateDelete(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = CommentSerializer
-    lookup_url_kwarg = "pk"
+    lookup_url_kwarg = "comment_pk"
 
     def get_queryset(self):
-        pk = self.kwargs["pk"]
         news_pk = self.kwargs["news_pk"]
-        return Comment.objects.filter(pk=pk, news=news_pk)
+        return Comment.objects.filter(news=news_pk)

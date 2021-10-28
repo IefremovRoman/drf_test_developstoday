@@ -26,8 +26,8 @@ from news.api import (
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/news/", NewsListCreate.as_view()),
-    path("api/news/<int:pk>/", NewsUpdateDelete.as_view()),
-    path("api/news/<int:pk>/upvote/", NewsUpVote.as_view()),
-    path("api/news/<int:pk>/comments/", CommentListCreate.as_view()),
-    path("api/news/<int:news_pk>/comments/<int:pk>/", CommentUpdateDelete.as_view()),
+    path("api/news/<int:news_pk>/", NewsUpdateDelete.as_view()),
+    path("api/news/<int:news_pk>/upvote/", NewsUpVote.as_view()),
+    path("api/news/<int:news_pk>/comments/", CommentListCreate.as_view()),
+    path("api/news/<int:news_pk>/comments/<int:comment_pk>/", CommentUpdateDelete.as_view()),
 ]
