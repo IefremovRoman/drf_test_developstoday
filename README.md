@@ -29,14 +29,13 @@ The projects works on PostgreSQL using psycopg2 library at Python site. So be su
 
 ### **Steps to start on**
 
-You can move right through the steps to start the project on your computer, or just use Docker container (next chapter).
+You can move right through the steps to start the project on your computer, or just use Docker container (next chapter).    
+`docker-compose up`
 
 Make sure you have venv at your machine or just 
 pip install virtualenv
 
 Choose local place to put the project (cd ....) and follow next steps:    
-Python 2:    
-`virtualenv env`    
 
 Python 3:    
 `python -m venv yourvenv`    
