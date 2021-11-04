@@ -102,10 +102,10 @@ WSGI_APPLICATION = "developstoday.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": "chat",
-        "USER": "admin",
-        "PASSWORD": "admin",
-        "HOST": "localhost",
+        "NAME": os.getenv("POSTGRES_DB", "chat"),
+        "USER": os.getenv("POSTGRES_USER", "admin"),
+        "PASSWORD": os.getenv("POSTGRES_PASSWORD", "admin"),
+        "HOST": os.getenv("POSTGRES_HOST", "localhost"),
         "PORT": "5432",
     }
 }
